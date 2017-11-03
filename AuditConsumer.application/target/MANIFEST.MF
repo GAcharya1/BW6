@@ -1,0 +1,10 @@
+Manifest-Version: 1.0.0.qualifier
+TIBCO-BW-Application: META-INF/TIBCO.xml
+Bundle-SymbolicName: AuditConsumer.application
+Bundle-Name: AuditConsumer Application
+Bundle-Version: 1.0.0.qualifier
+Bundle-ManifestVersion: 2
+Bundle-Vendor: TIBCO Software Inc.
+TIBCO-BW-ConfigProfile: META-INF/default.substvar
+TIBCO-BW-Version: 6.4.0 V29 2017-05-09
+
