@@ -7,6 +7,7 @@
     xmlns:ns="http://www.tibco.com/pe/EngineTypes"
     xmlns:ns0="http://tns.tibco.com/bw/activity/timer/xsd/output"
     xmlns:ns1="http://www.tibco.com/pe/WriteToLogActivitySchema"
+    xmlns:ns2="http://www.tibco.com/namespaces/tnt/plugins/httpreceiver+de021872-a68b-4c29-b035-c9e76ef19a03+ActivityOutputType"
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
     xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
     xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
@@ -195,6 +196,124 @@
             </xs:complexType>
             <xs:element name="ActivityInput" type="tns:LogParametersType"/>
         </xs:schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://xmlns.tibco.com/encodings/mime"
+            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlns.tibco.com/encodings/mime">
+            <complexType name="mimePartType">
+                <sequence>
+                    <element maxOccurs="1" minOccurs="1"
+                        name="mimeHeaders" type="tns:mimeHeadersType"/>
+                    <choice>
+                        <element name="binaryContent" type="base64Binary"/>
+                        <element name="textContent" type="string"/>
+                        <element name="fileName" type="string"/>
+                    </choice>
+                </sequence>
+            </complexType>
+            <complexType name="mimeHeadersType">
+                <sequence>
+                    <element maxOccurs="1" minOccurs="0"
+                        name="content-disposition" type="string"/>
+                    <element maxOccurs="1" minOccurs="1"
+                        name="content-type" type="string"/>
+                    <element maxOccurs="1" minOccurs="0"
+                        name="content-transfer-encoding" type="string"/>
+                    <element maxOccurs="1" minOccurs="0"
+                        name="content-id" type="string"/>
+                    <any maxOccurs="unbounded" minOccurs="0"
+                        namespace="##any" processContents="lax"/>
+                </sequence>
+            </complexType>
+            <complexType name="mimeEnvelopeElementType">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0"
+                        name="mimePart" type="tns:mimePartType"/>
+                </sequence>
+            </complexType>
+            <element name="mimeEnvelopeElement" type="tns:mimeEnvelopeElementType"/>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/httpreceiver+de021872-a68b-4c29-b035-c9e76ef19a03+ActivityOutputType"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:ns0="http://xmlns.tibco.com/encodings/mime" xmlns:tns="http://www.tibco.com/namespaces/tnt/plugins/httpreceiver+de021872-a68b-4c29-b035-c9e76ef19a03+ActivityOutputType">
+            <import namespace="http://xmlns.tibco.com/encodings/mime"/>
+            <!-- xmlns:ns1="http://xmlns.tibco.com/bw/plugin-api/messages/context" -->
+            <complexType name="headersType">
+                <sequence>
+                    <element form="unqualified" minOccurs="0"
+                        name="Accept" type="string"/>
+                    <element form="unqualified" minOccurs="0"
+                        name="Accept-Charset" type="string"/>
+                    <element form="unqualified" minOccurs="0"
+                        name="Accept-Encoding" type="string"/>
+                    <element form="unqualified" minOccurs="0"
+                        name="Content-Type" type="string"/>
+                    <element form="unqualified" minOccurs="0"
+                        name="Content-Length" type="string"/>
+                    <element form="unqualified" minOccurs="0"
+                        name="Connection" type="string"/>
+                    <element form="unqualified" minOccurs="0"
+                        name="Cookie" type="string"/>
+                    <element form="unqualified" minOccurs="0"
+                        name="Pragma" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="dynamicHeadersTypeDetails">
+                <sequence>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="1" name="Name" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="1" name="Value" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="dynamicHeadersType">
+                <sequence>
+                    <element form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="Header" type="tns:dynamicHeadersTypeDetails"/>
+                </sequence>
+            </complexType>
+            <complexType name="ContextType">
+                <sequence>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="1" name="RemoteAddress" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="HTTPEventSourceOutputType">
+                <sequence>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="Method" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="RequestURI" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="HTTPVersion" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="PostData" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="QueryString" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="Header" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="Protocol" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="Port" type="string"/>
+                    <element maxOccurs="1" minOccurs="0" name="Headers" type="tns:headersType"/>
+                    <element maxOccurs="1" minOccurs="0"
+                        name="DynamicHeaders" type="tns:dynamicHeadersType"/>
+                    <element minOccurs="0" ref="ns0:mimeEnvelopeElement"/>
+                    <element name="Context" type="tns:ContextType"/>
+                </sequence>
+            </complexType>
+            <element name="ProcessStarterOutput" type="tns:HTTPEventSourceOutputType"/>
+            <complexType name="WaitForHTTPRequestInputType">
+                <sequence>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="key" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="processTimeout" type="int"/>
+                </sequence>
+            </complexType>
+            <element name="input" type="tns:WaitForHTTPRequestInputType"/>
+        </schema>
     </tibex:Types>
     <tibex:ProcessInfo callable="false" createdBy="Administrator"
         createdOn="Fri Nov 03 04:48:20 CDT 2017" description=""
@@ -298,6 +417,41 @@
                                     <layoutConstraint x="364"
                                     xsi:type="notation:Bounds" y="148"/>
                                     </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint x="261"
+                                    xsi:type="notation:Bounds" y="236"/>
+                                    </children>
                                     <styles xsi:type="notation:DrawerStyle"/>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -360,6 +514,12 @@
             name="_processContext" sca-bpel:internal="true"/>
         <bpws:variable element="ns0:TimerOutputSchema" name="Timer" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:ActivityInput" name="Log-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns2:ProcessStarterOutput"
+            name="HTTPReceiver" sca-bpel:internal="true"/>
+        <bpws:variable name="httpConnectorResource"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://xsd.tns.tibco.com/bw/models/sharedresource/httpconnector}HttpConnectorConfiguration" type="xsd:string"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -434,6 +594,36 @@
                         </bwext:BWActivity>
                     </tibex:config>
                 </tibex:activityExtension>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:receiveEvent createInstance="yes"
+                    eventTimeout="60"
+                    governedObjectTypes="BWHttpService"
+                    name="HTTPReceiver"
+                    tibex:xpdlId="de021872-a68b-4c29-b035-c9e76ef19a03"
+                    variable="HTTPReceiver" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <tibex:eventSource>
+                        <bwext:BWActivity
+                            activityTypeID="bw.http.HTTPReceiver"
+                            version="6.0.0.20132205"
+                            xmlns:ActivityOutputType="http://www.tibco.com/namespaces/tnt/plugins/httpreceiver+de021872-a68b-4c29-b035-c9e76ef19a03+ActivityOutputType"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:http="http://ns.tibco.com/bw/palette/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/http#//HTTPReceiver"/>
+                                    <value customId=""
+                                    defaultEncoding="ISO8859_1"
+                                    httpConnection="httpConnectorResource"
+                                    outputHeadersQName="ActivityOutputType:headersType"
+                                    outputStyle="String"
+                                    sequencingKey="" xsi:type="http:HTTPReceiver"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:eventSource>
+                </tibex:receiveEvent>
             </bpws:extensionActivity>
         </bpws:flow>
     </bpws:scope>
