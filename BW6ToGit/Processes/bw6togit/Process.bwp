@@ -198,124 +198,6 @@
             </xs:complexType>
             <xs:element name="ActivityInput" type="tns:LogParametersType"/>
         </xs:schema>
-        <schema elementFormDefault="unqualified"
-            targetNamespace="http://xmlns.tibco.com/encodings/mime"
-            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlns.tibco.com/encodings/mime">
-            <complexType name="mimePartType">
-                <sequence>
-                    <element maxOccurs="1" minOccurs="1"
-                        name="mimeHeaders" type="tns:mimeHeadersType"/>
-                    <choice>
-                        <element name="binaryContent" type="base64Binary"/>
-                        <element name="textContent" type="string"/>
-                        <element name="fileName" type="string"/>
-                    </choice>
-                </sequence>
-            </complexType>
-            <complexType name="mimeHeadersType">
-                <sequence>
-                    <element maxOccurs="1" minOccurs="0"
-                        name="content-disposition" type="string"/>
-                    <element maxOccurs="1" minOccurs="1"
-                        name="content-type" type="string"/>
-                    <element maxOccurs="1" minOccurs="0"
-                        name="content-transfer-encoding" type="string"/>
-                    <element maxOccurs="1" minOccurs="0"
-                        name="content-id" type="string"/>
-                    <any maxOccurs="unbounded" minOccurs="0"
-                        namespace="##any" processContents="lax"/>
-                </sequence>
-            </complexType>
-            <complexType name="mimeEnvelopeElementType">
-                <sequence>
-                    <element maxOccurs="unbounded" minOccurs="0"
-                        name="mimePart" type="tns:mimePartType"/>
-                </sequence>
-            </complexType>
-            <element name="mimeEnvelopeElement" type="tns:mimeEnvelopeElementType"/>
-        </schema>
-        <schema elementFormDefault="unqualified"
-            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/httpreceiver+de021872-a68b-4c29-b035-c9e76ef19a03+ActivityOutputType"
-            xmlns="http://www.w3.org/2001/XMLSchema"
-            xmlns:ns0="http://xmlns.tibco.com/encodings/mime" xmlns:tns="http://www.tibco.com/namespaces/tnt/plugins/httpreceiver+de021872-a68b-4c29-b035-c9e76ef19a03+ActivityOutputType">
-            <import namespace="http://xmlns.tibco.com/encodings/mime"/>
-            <!-- xmlns:ns1="http://xmlns.tibco.com/bw/plugin-api/messages/context" -->
-            <complexType name="headersType">
-                <sequence>
-                    <element form="unqualified" minOccurs="0"
-                        name="Accept" type="string"/>
-                    <element form="unqualified" minOccurs="0"
-                        name="Accept-Charset" type="string"/>
-                    <element form="unqualified" minOccurs="0"
-                        name="Accept-Encoding" type="string"/>
-                    <element form="unqualified" minOccurs="0"
-                        name="Content-Type" type="string"/>
-                    <element form="unqualified" minOccurs="0"
-                        name="Content-Length" type="string"/>
-                    <element form="unqualified" minOccurs="0"
-                        name="Connection" type="string"/>
-                    <element form="unqualified" minOccurs="0"
-                        name="Cookie" type="string"/>
-                    <element form="unqualified" minOccurs="0"
-                        name="Pragma" type="string"/>
-                </sequence>
-            </complexType>
-            <complexType name="dynamicHeadersTypeDetails">
-                <sequence>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="1" name="Name" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="1" name="Value" type="string"/>
-                </sequence>
-            </complexType>
-            <complexType name="dynamicHeadersType">
-                <sequence>
-                    <element form="unqualified" maxOccurs="unbounded"
-                        minOccurs="0" name="Header" type="tns:dynamicHeadersTypeDetails"/>
-                </sequence>
-            </complexType>
-            <complexType name="ContextType">
-                <sequence>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="1" name="RemoteAddress" type="string"/>
-                </sequence>
-            </complexType>
-            <complexType name="HTTPEventSourceOutputType">
-                <sequence>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="Method" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="RequestURI" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="HTTPVersion" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="PostData" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="QueryString" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="Header" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="Protocol" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="Port" type="string"/>
-                    <element maxOccurs="1" minOccurs="0" name="Headers" type="tns:headersType"/>
-                    <element maxOccurs="1" minOccurs="0"
-                        name="DynamicHeaders" type="tns:dynamicHeadersType"/>
-                    <element minOccurs="0" ref="ns0:mimeEnvelopeElement"/>
-                    <element name="Context" type="tns:ContextType"/>
-                </sequence>
-            </complexType>
-            <element name="ProcessStarterOutput" type="tns:HTTPEventSourceOutputType"/>
-            <complexType name="WaitForHTTPRequestInputType">
-                <sequence>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="key" type="string"/>
-                    <element form="unqualified" maxOccurs="1"
-                        minOccurs="0" name="processTimeout" type="int"/>
-                </sequence>
-            </complexType>
-            <element name="input" type="tns:WaitForHTTPRequestInputType"/>
-        </schema>
         <xsd:schema attributeFormDefault="unqualified"
             elementFormDefault="qualified"
             targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/jms+d5c63b10-2bab-4a80-a9a9-343bc5ee75c4+input"
@@ -684,6 +566,11 @@
             </xsd:complexType>
             <xsd:element name="GetJMSActivityInput" type="JMSQueueGetMessageInputSchema"/>
         </xsd:schema>
+        <wsdl:definitions
+            targetNamespace="http://xmlns.example.com/20171103044820"
+            xmlns:tns="http://xmlns.example.com/20171103044820"
+            xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
+            xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
     </tibex:Types>
     <tibex:ProcessInfo callable="false" createdBy="Administrator"
         createdOn="Fri Nov 03 04:48:20 CDT 2017" description=""
@@ -819,41 +706,6 @@
                                     gradientEndColor="50431"
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.2"/>
-                                    <layoutConstraint x="261"
-                                    xsi:type="notation:Bounds" y="236"/>
-                                    </children>
-                                    <children type="4002">
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <styles fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <styles
-                                    backgroundColor="16777215"
-                                    gradientEndColor="50431"
-                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.3"/>
                                     <layoutConstraint x="232"
                                     xsi:type="notation:Bounds" y="117"/>
                                     </children>
@@ -888,7 +740,7 @@
                                     backgroundColor="16777215"
                                     gradientEndColor="50431"
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.4"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.3"/>
                                     <layoutConstraint x="448"
                                     xsi:type="notation:Bounds" y="128"/>
                                     </children>
@@ -950,7 +802,7 @@
         </edges>
         <edges
             source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3" type="4006">
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2" type="4006">
             <children type="6002">
                 <layoutConstraint xsi:type="notation:Location" y="40"/>
             </children>
@@ -960,7 +812,7 @@
             <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
         <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3"
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
             target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
             <children type="6002">
                 <layoutConstraint xsi:type="notation:Location" y="40"/>
@@ -972,7 +824,7 @@
         </edges>
         <edges
             source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.4" type="4006">
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3" type="4006">
             <children type="6002">
                 <layoutConstraint xsi:type="notation:Location" y="40"/>
             </children>
@@ -987,14 +839,13 @@
             name="_processContext" sca-bpel:internal="true"/>
         <bpws:variable element="ns0:TimerOutputSchema" name="Timer" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:ActivityInput" name="Log-input" sca-bpel:internal="true"/>
-        <bpws:variable element="ns2:ProcessStarterOutput"
-            name="HTTPReceiver" sca-bpel:internal="true"/>
         <bpws:variable name="httpConnectorResource"
             sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
             sca-bpel:property="yes"
             sca-bpel:sharedResourceType="{http://xsd.tns.tibco.com/bw/models/sharedresource/httpconnector}HttpConnectorConfiguration" type="xsd:string"/>
-        <bpws:variable name="Mapper-input" sca-bpel:internal="true"/>
-        <bpws:variable name="Mapper" sca-bpel:internal="true"/>
+        <bpws:variable element="ns0:TimerOutputSchema"
+            name="Mapper-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns0:TimerOutputSchema" name="Mapper" sca-bpel:internal="true"/>
         <bpws:variable element="ns3:ActivityInput"
             name="JMSSendMessage-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns4:aEmptyOutputClass"
@@ -1086,38 +937,11 @@
                 </tibex:activityExtension>
             </bpws:extensionActivity>
             <bpws:extensionActivity>
-                <tibex:receiveEvent createInstance="yes"
-                    eventTimeout="60"
-                    governedObjectTypes="BWHttpService"
-                    name="HTTPReceiver"
-                    tibex:xpdlId="de021872-a68b-4c29-b035-c9e76ef19a03"
-                    variable="HTTPReceiver" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
-                    <tibex:eventSource>
-                        <bwext:BWActivity
-                            activityTypeID="bw.http.HTTPReceiver"
-                            version="6.0.0.20132205"
-                            xmlns:ActivityOutputType="http://www.tibco.com/namespaces/tnt/plugins/httpreceiver+de021872-a68b-4c29-b035-c9e76ef19a03+ActivityOutputType"
-                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
-                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
-                            xmlns:http="http://ns.tibco.com/bw/palette/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <activityConfig>
-                                <properties name="config" xsi:type="activityconfig:EMFProperty">
-                                    <type href="http://ns.tibco.com/bw/palette/http#//HTTPReceiver"/>
-                                    <value customId=""
-                                    defaultEncoding="ISO8859_1"
-                                    httpConnection="httpConnectorResource"
-                                    outputHeadersQName="ActivityOutputType:headersType"
-                                    outputStyle="String"
-                                    sequencingKey="" xsi:type="http:HTTPReceiver"/>
-                                </properties>
-                            </activityConfig>
-                        </bwext:BWActivity>
-                    </tibex:eventSource>
-                </tibex:receiveEvent>
-            </bpws:extensionActivity>
-            <bpws:extensionActivity>
-                <tibex:activityExtension inputVariable="Mapper-input"
-                    name="Mapper" outputVariable="Mapper"
+                <tibex:activityExtension
+                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://tns.tibco.com/bw/activity/timer/xsd/output&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Timer&quot;/>&lt;xsl:template name=&quot;Mapper-input&quot; match=&quot;/&quot;>&lt;xsl:copy-of select=&quot;$Timer&quot;/>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
+                    inputVariable="Mapper-input" name="Mapper"
+                    outputVariable="Mapper"
                     tibex:xpdlId="c76a2e39-e7e0-484c-92ec-3d33aa232159" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                     <bpws:targets>
                         <bpws:target linkName="TimerToMapper"/>
@@ -1125,17 +949,23 @@
                     <bpws:sources>
                         <bpws:source linkName="MapperToLog"/>
                     </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://tns.tibco.com/bw/activity/timer/xsd/output&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Timer&quot;/>&lt;xsl:template name=&quot;Mapper-input&quot; match=&quot;/&quot;>&lt;xsl:copy-of select=&quot;$Timer&quot;/>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
                     <tibex:config>
                         <bwext:BWActivity
                             activityTypeID="bw.generalactivities.mapper"
                             version="6.0.0.001"
                             xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
                             xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
-                            xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities"
+                            xmlns:output="http://tns.tibco.com/bw/activity/timer/xsd/output" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <activityConfig>
                                 <properties name="config" xsi:type="activityconfig:EMFProperty">
                                     <type href="http://ns.tibco.com/bw/palette/generalactivities#//Mapper"/>
-                                    <value xsi:type="generalactivities:Mapper"/>
+                                    <value
+                                    inputQName="output:TimerOutputSchema" xsi:type="generalactivities:Mapper"/>
                                 </properties>
                             </activityConfig>
                         </bwext:BWActivity>
@@ -1144,7 +974,7 @@
             </bpws:extensionActivity>
             <bpws:extensionActivity>
                 <tibex:activityExtension
-                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?> &lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jms+d5c63b10-2bab-4a80-a9a9-343bc5ee75c4+input&quot; version=&quot;2.0&quot;> &lt;xsl:template name=&quot;JMSSendMessage-input&quot; match=&quot;/&quot;> &lt;tns:ActivityInput/> &lt;/xsl:template> &lt;/xsl:stylesheet>"
+                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jms+d5c63b10-2bab-4a80-a9a9-343bc5ee75c4+input&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Mapper&quot;/>&lt;xsl:template name=&quot;JMSSendMessage-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;Body>&lt;xsl:value-of select=&quot;$Mapper/Time&quot;/>&lt;/Body>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>"
                     expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
                     inputVariable="JMSSendMessage-input"
                     name="JMSSendMessage"
@@ -1155,7 +985,7 @@
                     </bpws:targets>
                     <tibex:inputBindings>
                         <tibex:inputBinding
-                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?> &lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jms+d5c63b10-2bab-4a80-a9a9-343bc5ee75c4+input&quot; version=&quot;2.0&quot;> &lt;xsl:template name=&quot;JMSSendMessage-input&quot; match=&quot;/&quot;> &lt;tns:ActivityInput/> &lt;/xsl:template> &lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jms+d5c63b10-2bab-4a80-a9a9-343bc5ee75c4+input&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Mapper&quot;/>&lt;xsl:template name=&quot;JMSSendMessage-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;Body>&lt;xsl:value-of select=&quot;$Mapper/Time&quot;/>&lt;/Body>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                     </tibex:inputBindings>
                     <tibex:config>
                         <bwext:BWActivity activityTypeID="bw.jms.send"
