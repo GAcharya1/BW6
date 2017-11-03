@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_H2ipgMB8EeeoFfzH_V2NFA" targetNamespace="http://tns.tibco.com/bw/composite/BW6ToGit" name="BW6ToGit" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_IaTd4MB8EeeoFfzH_V2NFA" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_IadO4MB8EeeoFfzH_V2NFA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_IadO4cB8EeeoFfzH_V2NFA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_IadO4sB8EeeoFfzH_V2NFA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Iam_4MB8EeeoFfzH_V2NFA" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Iam_4cB8EeeoFfzH_V2NFA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Iam_4sB8EeeoFfzH_V2NFA" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Iam_48B8EeeoFfzH_V2NFA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_IawJ0MB8EeeoFfzH_V2NFA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_IFvjIMB8EeeoFfzH_V2NFA" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_IFvjIcB8EeeoFfzH_V2NFA" processName="bw6togit.Process"/>
+  </sca:component>
+</sca:composite>
